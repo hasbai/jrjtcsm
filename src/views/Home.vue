@@ -4,8 +4,18 @@
       <div class="display-card-content">{{ target.name }}</div>
     </n-card>
     <div class="roll">
-      <div></div>
-      <n-button type="primary" @click="roll10">roll</n-button>
+      <n-button class="invisible reset">🗘</n-button>
+      <n-image
+        width="100"
+        height="100"
+        :src="srcRoll"
+        :preview-disabled="true"
+        @click="onRoll"
+      />
+      <div class="hidden">
+        <img src="/img/shock.gif" alt="" />
+        <img src="/img/shock.png" alt="" />
+      </div>
       <n-button class="reset" @click="reset">🗘</n-button>
     </div>
     <n-collapse class="setting-panel">
@@ -42,6 +52,7 @@ import {
   NCollapse,
   NCollapseItem,
   NDivider,
+  NImage,
   NSlider,
 } from 'naive-ui'
 export default {
@@ -53,12 +64,14 @@ export default {
     NCollapseItem,
     NSlider,
     NDivider,
+    NImage,
   },
   data() {
     return {
       data: [],
       defaultTarget: { name: '什么' },
       target: { name: '什么' },
+      srcRoll: '/img/eat.gif',
     }
   },
   computed: {
@@ -108,13 +121,19 @@ export default {
         this.target = result
       }
     },
-    async roll10() {
-      for (let i = 0; i < 10; i++) {
+    async rollS(ms) {
+      const start = Date.now()
+      while (Date.now() - start < ms) {
         const start = Date.now()
         this.roll()
         const wait = Math.max(50 - (Date.now() - start), 0)
         await new Promise((r) => setTimeout(r, wait))
       }
+    },
+    async onRoll() {
+      this.srcRoll = '/img/shock.gif'
+      await this.rollS(1000)
+      this.srcRoll = '/img/shock.png'
     },
     reset() {
       this.data.forEach((category) => {
@@ -124,6 +143,7 @@ export default {
         })
       })
       this.target = this.defaultTarget
+      this.srcRoll = '/img/eat.gif'
     },
     async updateData() {
       const r = await fetch('/data.json')
@@ -142,7 +162,6 @@ export default {
           })
         }
       })
-      console.log(data)
       data.forEach((category) => {
         if (category.weight === undefined) {
           category.weight = 100
@@ -168,6 +187,9 @@ export default {
   },
   created() {
     this.updateData()
+    fetch('/img/eat.gif')
+    fetch('/img/shock.gif')
+    fetch('/img/shock.png')
     setInterval(() => {
       if (this.data.length > 0) {
         this.setData(this.data)

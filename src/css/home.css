@@ -11,11 +11,21 @@
 .roll {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 2rem 0;
     width: 100%;
 }
 .roll .reset {
     font-size: 1.5rem;
+}
+.invisible{
+    visibility:hidden
+}
+.hidden{
+    display: none;
+}
+.roll img {
+    cursor: pointer;
 }
 .item {
     display: flex;
