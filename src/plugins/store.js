@@ -1,4 +1,4 @@
-import {createStore} from 'vuex'
+import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
@@ -8,10 +8,21 @@ const store = createStore({
     }),
   ],
   state() {
-    return {}
+    return {
+      data: [],
+    }
   },
-  getters: {},
-  mutations: {},
+  getters: {
+    data() {
+      return JSON.parse(localStorage.getItem('csm-data')) || []
+    },
+  },
+  mutations: {
+    setData(state, data) {
+      state.data = data
+      localStorage.setItem('csm-data', JSON.stringify(data))
+    },
+  },
 })
 
 export default store

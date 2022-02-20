@@ -56,31 +56,19 @@ export default {
   },
   data() {
     return {
-      list: [],
-      data: [
-        {
-          name: '校内',
-          items: [
-            { name: '南食' },
-            { name: '南苑' },
-            { name: '旦苑' },
-            { name: '北食' },
-          ],
-        },
-        {
-          name: '校外',
-          items: [
-            { name: '麦当劳', location: '三号湾' },
-            { name: '萨莉亚', location: '三号湾' },
-            { name: 'LaBamba', location: '三号湾' },
-            { name: '吉祥馄饨', location: '政肃路' },
-            { name: '羊肉汤', location: '政肃路' },
-          ],
-        },
-      ],
+      data: [],
       defaultTarget: { name: '什么' },
       target: { name: '什么' },
     }
+  },
+  computed: {
+    list() {
+      const list = []
+      this.data.forEach((category) => {
+        list.push(...category.items)
+      })
+      return list
+    },
   },
   methods: {
     onUpdateCategoryWeight(categoryWeight, items) {
@@ -137,16 +125,54 @@ export default {
       })
       this.target = this.defaultTarget
     },
+    async updateData() {
+      const r = await fetch('/data.json')
+      const data = await r.json()
+      const oldData = this.getData()
+      data.forEach((category) => {
+        const oldCategory = oldData.find((c) => c.name === category.name)
+        if (oldCategory) {
+          category.weight = oldCategory.weight
+          category.items.forEach((item) => {
+            const oldItem = oldCategory.items.find((i) => i.name === item.name)
+            if (oldItem) {
+              item.weight = oldItem.weight
+              item._weight = oldItem._weight
+            }
+          })
+        }
+      })
+      console.log(data)
+      data.forEach((category) => {
+        if (category.weight === undefined) {
+          category.weight = 100
+        }
+        category.items.forEach((item) => {
+          if (item.weight === undefined) {
+            item.weight = 100
+          }
+          if (item._weight === undefined) {
+            item._weight = 100
+          }
+        })
+      })
+      this.data = data
+      this.setData(this.data)
+    },
+    setData(data) {
+      localStorage.setItem('csm-data', JSON.stringify(data))
+    },
+    getData() {
+      return JSON.parse(localStorage.getItem('csm-data')) || []
+    },
   },
   created() {
-    this.data.forEach((category) => {
-      category.weight = category.weight || 100
-      category.items.forEach((item) => {
-        item.weight = item.weight || 100
-        item._weight = item._weight || 100
-      })
-      this.list.push(...category.items)
-    })
+    this.updateData()
+    setInterval(() => {
+      if (this.data.length > 0) {
+        this.setData(this.data)
+      }
+    }, 1000)
   },
 }
 </script>

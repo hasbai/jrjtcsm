@@ -1,0 +1,44 @@
+[
+  {
+    "name": "校内",
+    "items": [
+      {
+        "name": "南食"
+      },
+      {
+        "name": "南苑"
+      },
+      {
+        "name": "旦苑"
+      },
+      {
+        "name": "北食"
+      }
+    ]
+  },
+  {
+    "name": "校外",
+    "items": [
+      {
+        "name": "麦当劳",
+        "location": "三号湾"
+      },
+      {
+        "name": "萨莉亚",
+        "location": "三号湾"
+      },
+      {
+        "name": "LaBamba",
+        "location": "三号湾"
+      },
+      {
+        "name": "吉祥馄饨",
+        "location": "政肃路"
+      },
+      {
+        "name": "羊肉汤",
+        "location": "政肃路"
+      }
+    ]
+  }
+]
