@@ -6,8 +6,8 @@ import Header from '@/components/Header.vue'
 
 <template>
   <Header></Header>
-
   <router-view></router-view>
+  <footer></footer>
 </template>
 
 <style></style>

@@ -16,7 +16,7 @@
         <img src="/img/shock.gif" alt="" />
         <img src="/img/shock.png" alt="" />
       </div>
-      <n-button class="reset" @click="reset">🗘</n-button>
+      <n-button class="reset" @click="reset">⟳</n-button>
     </div>
     <n-collapse class="setting-panel">
       <n-collapse-item
