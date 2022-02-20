@@ -1,0 +1,32 @@
+.display-card {
+    margin-top: 5rem;
+    align-items: center;
+}
+.display-card-content {
+    font-size: 5rem;
+}
+.category-slider {
+    margin-bottom: 1.5rem;
+}
+.roll {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    width: 100%;
+}
+.roll .reset {
+    font-size: 1.5rem;
+}
+.item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid rgb(239, 239, 245);
+    padding: 1rem 0;
+}
+.item .text {
+    width: 12em;
+}
+.item .n-slider {
+    max-width: 700px;
+}

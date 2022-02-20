@@ -1,41 +1,38 @@
 <template>
-  <div class="center">
-    <header>header</header>
-    <main>
-      <n-card class="display-card" title="嘉然今天吃...">
-        <div class="display-card-content">{{ target.name }}</div>
-      </n-card>
-      <div class="roll">
-        <div></div>
-        <n-button type="primary" @click="roll10">roll</n-button>
-        <n-button class="reset" @click="reset">🗘</n-button>
-      </div>
-      <n-collapse class="setting-panel">
-        <n-collapse-item
-          v-for="(category, i) in data"
-          :key="i"
-          :title="category.name"
-          :name="category.name"
-        >
-          <n-slider
-            class="category-slider"
-            v-model:value="category.weight"
-            @update:value="onUpdateCategoryWeight($event, category.items)"
-            :default-value="100"
-          ></n-slider>
-          <div class="item" v-for="(item, j) in category.items" :key="j">
-            <div class="text">
-              {{ item.name + ' @ ' + (item.location || category.name) }}
-            </div>
-            <n-slider
-              :value="item.weight"
-              @update:value="onUpdateItemWeight($event, item)"
-            ></n-slider>
+  <main>
+    <n-card class="display-card" title="嘉然今天吃...">
+      <div class="display-card-content">{{ target.name }}</div>
+    </n-card>
+    <div class="roll">
+      <div></div>
+      <n-button type="primary" @click="roll10">roll</n-button>
+      <n-button class="reset" @click="reset">🗘</n-button>
+    </div>
+    <n-collapse class="setting-panel">
+      <n-collapse-item
+        v-for="(category, i) in data"
+        :key="i"
+        :title="category.name"
+        :name="category.name"
+      >
+        <n-slider
+          class="category-slider"
+          v-model:value="category.weight"
+          @update:value="onUpdateCategoryWeight($event, category.items)"
+          :default-value="100"
+        ></n-slider>
+        <div class="item" v-for="(item, j) in category.items" :key="j">
+          <div class="text">
+            {{ item.name + ' @ ' + (item.location || category.name) }}
           </div>
-        </n-collapse-item>
-      </n-collapse>
-    </main>
-  </div>
+          <n-slider
+            :value="item.weight"
+            @update:value="onUpdateItemWeight($event, item)"
+          ></n-slider>
+        </div>
+      </n-collapse-item>
+    </n-collapse>
+  </main>
 </template>
 
 <script>
@@ -45,10 +42,8 @@ import {
   NCollapse,
   NCollapseItem,
   NDivider,
-  NIcon,
   NSlider,
 } from 'naive-ui'
-import { RefreshFilled } from '@vicons/material'
 export default {
   name: 'Home',
   components: {
@@ -57,9 +52,7 @@ export default {
     NCollapse,
     NCollapseItem,
     NSlider,
-    NIcon,
     NDivider,
-    RefreshFilled,
   },
   data() {
     return {
