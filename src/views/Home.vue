@@ -23,17 +23,15 @@
             @update:value="onUpdateCategoryWeight($event, category.items)"
             :default-value="100"
           ></n-slider>
-          <n-card
-            v-for="(item, j) in category.items"
-            :key="j"
-            :title="item.name + ' @ ' + (item.location || category.name)"
-            size="small"
-          >
+          <div class="item" v-for="(item, j) in category.items" :key="j">
+            <div class="text">
+              {{ item.name + ' @ ' + (item.location || category.name) }}
+            </div>
             <n-slider
               :value="item.weight"
               @update:value="onUpdateItemWeight($event, item)"
             ></n-slider>
-          </n-card>
+          </div>
         </n-collapse-item>
       </n-collapse>
     </main>
@@ -46,6 +44,7 @@ import {
   NCard,
   NCollapse,
   NCollapseItem,
+  NDivider,
   NIcon,
   NSlider,
 } from 'naive-ui'
@@ -59,6 +58,7 @@ export default {
     NCollapseItem,
     NSlider,
     NIcon,
+    NDivider,
     RefreshFilled,
   },
   data() {

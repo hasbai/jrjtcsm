@@ -16,6 +16,11 @@ main{
     width: 100%;
 }
 
+#app .n-divider{
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
 .display-card {
     align-items: center;
 }
@@ -23,7 +28,7 @@ main{
     font-size: 5rem;
 }
 .category-slider {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .roll {
     display: flex;
@@ -33,3 +38,17 @@ main{
 .roll .reset {
     font-size: 1.5rem;
 }
+.item {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid rgb(239, 239, 245);
+    padding: 1rem 0;
+}
+.item .text {
+    width: 12em;
+}
+.item .n-slider {
+    max-width: 700px;
+}
+
